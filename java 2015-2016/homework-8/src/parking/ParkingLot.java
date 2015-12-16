@@ -17,7 +17,7 @@ public class ParkingLot {
 		for (int i = 0; i < 10; i++) {
 			for (int j = 0; j < 10; j++) {
 				if (parkingSpaces[i][j] == null) {
-					ParkingSlot slot = new ParkingSlot(i, j);
+					ParkingSlot slot = new ParkingSlot(i);
 					parkingSpaces[i][j] = slot;
 				}
 			}
