@@ -5,6 +5,7 @@ package si.auto;
  */
 public class VWPassat extends VW {
 	private static final int FUEL_TANK_SIZE = 65;
+	private int i = 0;
 
 	public VWPassat(int currentFuelAmount, String chassisNumber) {
 		super(currentFuelAmount, chassisNumber);
@@ -20,6 +21,7 @@ public class VWPassat extends VW {
 	 * @param fuelConsumedPer100Km
 	 */
 	public void shiftGear(int gear) {
+		this.gear = gear;
 		switch (gear) {
 		case 1:
 			fuelConsumedPer100Km = 8.5;
@@ -42,6 +44,11 @@ public class VWPassat extends VW {
 		default:
 			throw new IllegalArgumentException("not a gear");
 		}
+		if (gear - i > 1) {
+			throw new IllegalArgumentException("can t switch to that");
+
+		}
+		i = gear;
 	}
 
 	public double getPollutionPerKm() {

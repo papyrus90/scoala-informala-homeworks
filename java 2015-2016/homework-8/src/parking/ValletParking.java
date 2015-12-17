@@ -5,43 +5,55 @@ import java.util.Map;
 
 import si.auto.*;
 
+/**
+ * Generic class ValletParking,with a parameter T that extends Vehicle
+ * 
+ * @author alex
+ */
 public class ValletParking<T extends Vehicle> {
-	T t;
 	private ParkingSpace parkSpace = new ParkingSpace();
-	private Map<Double, Vehicle> valletParking;
+	private Map<Double, T> valletParking;
 	private double number;
 	private ParkingTicket ticket;
-	double amountOfFuelBeforeParking;
-	double amountOfFuelAferParking;
 
+	/**
+	 * ValletParking constructor that initializes the Map valletParking
+	 */
 	public ValletParking() {
-		valletParking = new HashMap<Double, Vehicle>();
+		valletParking = new HashMap<Double, T>();
 	}
 
-	public ParkingTicket parkVehicle(T t) {
-		this.t = t;
+	/**
+	 * generic method parkVehcile,with a parameter E that extends the type T
+	 * 
+	 * @return ParkingTicket ticket
+	 */
+	public <E extends T> ParkingTicket parkVehicle(E t) {
 		ParkingSlot slot;
-		amountOfFuelBeforeParking = t.getAvailableFuel();
 		slot = parkSpace.findAvailableSlot();
 		t.start();
+		t.shiftGear(1);
 		t.drive(2 + slot.slotNumber);
 		t.stop();
 		ticket = new ParkingTicket(slot, t);
-		number = ticket.uniqueNr;
+		number = ticket.getUniqueNr();
 		valletParking.put(number, t);
 		return ticket;
 	}
 
-	public Vehicle RetrieveVehicle(ParkingTicket ticket) {
-		Vehicle retrieved = valletParking.get(ticket.uniqueNr);
+	/**
+	 * method retrieveVehcile,with a parameter E that extends T
+	 * 
+	 * @return ParkingTicket ticket
+	 */
+	public T retrieveVehicle(ParkingTicket ticket) {
+		T retrieved = valletParking.get(ticket.getUniqueNr());
 		retrieved.start();
+		retrieved.shiftGear(1);
 		retrieved.drive(2 + (ticket.getSlot().getSlotNumber()));
 		retrieved.stop();
-
 		ticket.slot.isOccupied = false;
 		valletParking.remove(ticket.uniqueNr);
-
-		amountOfFuelAferParking = retrieved.getAvailableFuel();
 		return retrieved;
 	}
 

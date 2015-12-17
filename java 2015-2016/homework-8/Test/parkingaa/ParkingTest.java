@@ -10,7 +10,7 @@ import parking.ParkingTicket;
 import parking.ValletParking;
 import si.auto.Car;
 import si.auto.Logan;
-import si.auto.Vehicle;
+import si.auto.Scooter;
 
 public class ParkingTest {
 	Car logan;
@@ -47,7 +47,7 @@ public class ParkingTest {
 	@Test
 	public void checkSameCarBeforeAndAfterTheParking() {
 		ticket1 = carPark.parkVehicle(logan);
-		Car c = (Car) carPark.RetrieveVehicle(ticket1);
+		Car c = carPark.retrieveVehicle(ticket1);
 		Assert.assertEquals(logan, c);
 
 	}
@@ -56,10 +56,60 @@ public class ParkingTest {
 	public void checkIfACarIsParkedWhereAnotherOneHasLeft() {
 		ticket1 = carPark.parkVehicle(logan);
 		ParkingSlot slot = ticket1.getSlot();
-		carPark.RetrieveVehicle(ticket1);
+		carPark.retrieveVehicle(ticket1);
 		ticket2 = carPark.parkVehicle(logan1);
 		ParkingSlot slot1 = ticket2.getSlot();
 		Assert.assertEquals(slot, slot1);
 	}
 
+	@Test
+	public void checkIfFuelAvailableIsDifferent() {
+		double amountOfFuelBeforeParking = logan.getAvailableFuel();
+		carPark.parkVehicle(logan);
+		double amountOfFuelAfterParking = logan.getAvailableFuel();
+		Assert.assertNotEquals(amountOfFuelBeforeParking, amountOfFuelAfterParking, 0);
+
+	}
+
+	@Test
+	public void checkIfFuelAfterParkingIsLowerThanBeforeParking() {
+		double amountOfFuelBeforeParking = logan.getAvailableFuel();
+		ticket1 = carPark.parkVehicle(logan);
+		logan = carPark.retrieveVehicle(ticket1);
+		double amountOfFuelAfterParking = logan.getAvailableFuel();
+		boolean b = (amountOfFuelBeforeParking > amountOfFuelAfterParking);
+		Assert.assertTrue(b);
+	}
+
+	@Test(expected = IllegalArgumentException.class)
+	public void checkParkingWhenParkSpaceIsFull() {
+		ParkingSpace mockParkingSpace = new ParkingSpace() {
+			@Override
+			public boolean isFull() {
+				return true;
+			}
+		};
+		mockParkingSpace.findAvailableSlot();
+	}
+
+	@Test
+	public void checkIfIcanParkAScooter() {
+		ValletParking<Scooter> parkScooter = new ValletParking<>();
+		Scooter scooter = new Scooter(10);
+		ticket1 = parkScooter.parkVehicle(scooter);
+		ParkingSlot slot = ticket1.getSlot();
+		boolean b = slot.isOccupied();
+		Assert.assertTrue(b);
+
+	}
+
+	@Test
+	public void checkIfScooterParkedIsTheSameAsScooterRetrieved() {
+		ValletParking<Scooter> parkScooter = new ValletParking<>();
+		Scooter scooter = new Scooter(10);
+		ticket1 = parkScooter.parkVehicle(scooter);
+		Scooter scooter1 = parkScooter.retrieveVehicle(ticket1);
+		Assert.assertEquals(scooter, scooter1);
+
+	}
 }

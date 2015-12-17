@@ -12,5 +12,7 @@ public interface Vehicle {
 
 	double getAvailableFuel();
 	
+	void shiftGear(int gear);
+	
 	
 }

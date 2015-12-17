@@ -5,7 +5,8 @@ package si.auto;
  */
 public class VWGolf extends VW {
 	private static final int FUEL_TANK_SIZE = 55;
-
+	private int i = 0;
+	
 	public VWGolf(int currentFuelAmount, String chassisNumber) {
 		super(currentFuelAmount, chassisNumber);
 		if (currentFuelAmount > FUEL_TANK_SIZE) {
@@ -20,6 +21,7 @@ public class VWGolf extends VW {
 	 * @param fuelConsumedPer100Km
 	 */
 	public void shiftGear(int gear) {
+		this.gear = gear;
 		switch (gear) {
 		case 1:
 			fuelConsumedPer100Km = 8.1;
@@ -42,6 +44,11 @@ public class VWGolf extends VW {
 		default:
 			throw new IllegalArgumentException("not a gear");
 		}
+		if (gear - i > 1) {
+			throw new IllegalArgumentException("can t switch to that");
+
+		}
+		i = gear;
 	}
 
 	public double getPollutionPerKm() {

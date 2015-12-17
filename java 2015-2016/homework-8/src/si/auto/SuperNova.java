@@ -5,6 +5,7 @@ package si.auto;
  */
 public class SuperNova extends Dacia {
 	private static final int FUEL_TANK_SIZE = 45;
+	private int i = 0;
 
 	public SuperNova(int currentFuelAmount, String chassisNumber) {
 		super(currentFuelAmount, chassisNumber);
@@ -13,8 +14,6 @@ public class SuperNova extends Dacia {
 		}
 	}
 
-	int[] gear = { 1, 2, 3, 4, 5, 6 };
-
 	/**
 	 * shiftGear method that now sets fuelConsumedPer100Km
 	 * 
@@ -22,28 +21,37 @@ public class SuperNova extends Dacia {
 	 * @param fuelConsumedPer100Km
 	 */
 	public void shiftGear(int gear) {
-		if (gear == 1) {
+		this.gear = gear;
+		switch (gear) {
+		case 1:
 			fuelConsumedPer100Km = 9.9;
-		}
-		if (gear == 2) {
+			break;
+		case 2:
 			fuelConsumedPer100Km = 8.9;
-		}
-		if (gear == 3) {
+			break;
+		case 3:
 			fuelConsumedPer100Km = 7.9;
-		}
-		if (gear == 4) {
+			break;
+		case 4:
 			fuelConsumedPer100Km = 6.9;
-		}
-		if (gear == 5) {
+			break;
+		case 5:
 			fuelConsumedPer100Km = 5.9;
-		}
-		if (gear == 6) {
+			break;
+		case 6:
 			fuelConsumedPer100Km = 4.9;
-			if (gear == 0 || gear > 7) {
-				throw new IllegalArgumentException("not a gear");
-			}
+			break;
+		default:
+			throw new IllegalArgumentException("not a gear");
 		}
+		if (gear - i > 1) {
+			throw new IllegalArgumentException("can t switch to that");
+
+		}
+		i = gear;
 	}
+
+	
 
 	public double getPollutionPerKm() {
 		return 0.7;
