@@ -1,8 +1,8 @@
 package exception;
 
 /**
-* Genders that can be used
-*/
+ * Genders that can be used
+ */
 public enum GenderEnum {
-	MALE,FEMALE,UNDECLARED
+	MALE, FEMALE, UNDECLARED
 }
