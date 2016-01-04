@@ -3,7 +3,21 @@ import java.util.*;
 
 public class CarInventory {
 	
-
+	Map<String,Car>carMap;
+	
+	public void addCar(Car car){
+		carMap.put(car.chassisNumber, car);
+	}
+	
+	public  Car findCar(String chassisNumber){
+		Car vehicle = carMap.get(chassisNumber);
+		if (carMap.get(chassisNumber) ==null) throw new NullPointerException("That car doesn't exist");
+		return vehicle;
+	}
+	public void removeCar(String chassisNumber){
+		carMap.remove(chassisNumber);
+	}
+	
 	public static void main(String[] args) {
 		Map<String ,Car> carMap = new HashMap<String,Car>();
 		Car logan = new Logan(22,"alxca2");

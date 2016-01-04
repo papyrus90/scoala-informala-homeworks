@@ -1,7 +1,18 @@
 package si.auto;
 
+/**
+ * Interface used to model Vehicles.
+ */
 public interface Vehicle {
-	void start();
-	void stop();
+	boolean start();
+
+	boolean stop();
+
 	void drive(float distance);
+
+	double getAvailableFuel();
+	
+	void shiftGear(int gear);
+	
+	
 }

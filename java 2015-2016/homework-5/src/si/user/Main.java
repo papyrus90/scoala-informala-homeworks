@@ -15,7 +15,6 @@ public class Main {
 	logan.drive(100);
 	
 	System.out.println("Available fuel: " +  logan.getAvailableFuel());
-	System.out.println("Total pollution: " +  logan.totalPolution());
 	}
 	
 	
