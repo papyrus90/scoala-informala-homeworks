@@ -6,6 +6,7 @@ public class CarWash {
 
 	public List<Car> carsInLine = new ArrayList<>();
 	public Set<Car> carsWashed = new LinkedHashSet<Car>(carsInLine);
+	public List<Car> unWashedCars = new ArrayList<>();
 
 	public void openShop() {
 
@@ -25,10 +26,20 @@ public class CarWash {
 	public void closeShop() {
 		if (carsInLine.size() != 0) {
 			for (Car car : carsInLine) {
-				System.out.println("Unwashed car" + car);
+				unWashedCars.add(car);
 			}
 
 		}
+	}
+	
+	public List<Car> getPostponedClients(){
+		return unWashedCars;
+	}
+	
+	public List<Car>getTodaysClients(){
+		List<Car>todaysClients = new ArrayList<>();
+		todaysClients.addAll(carsWashed);
+		return todaysClients;
 	}
 
 	public void printClients() {

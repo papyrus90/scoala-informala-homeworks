@@ -1,62 +1,32 @@
 package si.auto;
-import java.util.*; 
+
+import java.util.*;
 
 public class CarInventory {
-	
-	Map<String,Car>carMap;
-	
-	public void addCar(Car car){
+
+	Map<String, Car> carMap;
+	List<Car> cars;
+
+	public CarInventory() {
+		carMap = new HashMap<>();
+	}
+
+	public void addCar(Car car) {
 		carMap.put(car.chassisNumber, car);
 	}
-	
-	public  Car findCar(String chassisNumber){
+
+	public Car findCar(String chassisNumber) {
 		Car vehicle = carMap.get(chassisNumber);
-		if (carMap.get(chassisNumber) ==null) throw new NullPointerException("That car doesn't exist");
+		if (carMap.get(chassisNumber) == null)
+			throw new NullPointerException("That car doesn't exist");
 		return vehicle;
 	}
-	public void removeCar(String chassisNumber){
+
+	public void removeCar(String chassisNumber) {
 		carMap.remove(chassisNumber);
-	}
-	
-	public static void main(String[] args) {
-		Map<String ,Car> carMap = new HashMap<String,Car>();
-		Car logan = new Logan(22,"alxca2");
-		Car nova = new SuperNova(35,"asdam1");
-		Car golf = new VWGolf(99,"njoqp3");
-		Car passat = new VWPassat(62,"mmaro5");
-	
-		carMap.put("alxca2", logan);
-		carMap.put("asdam1", nova);
-		carMap.put("njoqp3", golf);
-		carMap.put("mmaro5", passat);
-		
-		carMap.entrySet();
-		
-		
-		carMap.remove("alxca2");
-		carMap.get("asdam1");
-		carMap.get("alxca2");
-		
-		
-		CarWash carWash = new CarWash();
-		carWash.openShop();
-		carWash.standInLine(logan);
-		carWash.standInLine(nova);
-		carWash.standInLine(logan);
-		carWash.standInLine(golf);
-		
-		carWash.washCar();
-		carWash.standInLine(passat);
-		carWash.washCar();
-		carWash.washCar();
-		
-		
-		carWash.printClients();
-		carWash.closeShop();
-		
-		
-
-	
+		if (carMap.get(chassisNumber) == null)
+			throw new NullPointerException("That car doesn't exist");
 	}
 
+	
 }
