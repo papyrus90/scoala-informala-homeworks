@@ -2,6 +2,7 @@ package parking;
 
 import si.auto.Vehicle;
 
+// TODO CODE REVIEW: If ValletParking is generic, maybe this should be as well.
 public class ParkingTicket {
 	ParkingSlot slot;
 	double uniqueNr;

@@ -28,6 +28,7 @@ public class ValletParking<T extends Vehicle> {
 	 * 
 	 * @return ParkingTicket ticket
 	 */
+	// TODO CODE REVIEW: Why do you need E? T would be sufficient.
 	public <E extends T> ParkingTicket parkVehicle(E t) {
 		ParkingSlot slot;
 		slot = parkSpace.findAvailableSlot();

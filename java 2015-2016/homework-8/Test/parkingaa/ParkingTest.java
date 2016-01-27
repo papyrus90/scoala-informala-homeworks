@@ -1,5 +1,5 @@
 package parkingaa;
-
+// TODO CODE REVIEW: you should be using the same package as the classes you are testing. Also the test source folder should not have an uppercase name.
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
